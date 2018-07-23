@@ -1,0 +1,42 @@
+http://localhost:8787/dev_memory_php/memory/users/loginUser.php?username=we&password=we
+http://localhost/dev_memory_php/memory/users/loginUser.php?username=we&password=we
+################
+http://localhost:8787/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=3
+http://localhost:8787/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=4
+http://localhost/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=3
+http://localhost/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=4
+################
+http://localhost:8787/dev_memory_php/memory/account/getUserAccount.php?username=4&usernameParent=3&keysearch=*&typeAccount=*
+http://localhost:8787/dev_memory_php/memory/account/getUserAccount.php?username=3&usernameParent=3&keysearch=*&typeAccount=*
+http://localhost:8787/dev_memory_php/memory/account/getUserAccount.php?username=3&usernameParent=3&keysearch=key1&typeAccount=*
+http://localhost/dev_memory_php/memory/account/getUserAccount.php?username=4&usernameParent=3&keysearch=*&typeAccount=*
+http://localhost/dev_memory_php/memory/account/getUserAccount.php?username=3&usernameParent=3&keysearch=*&typeAccount=*
+http://localhost/dev_memory_php/memory/account/getUserAccount.php?username=3&usernameParent=3&keysearch=key1&typeAccount=*
+################
+http://localhost:8787/dev_memory_php/memory/account/addUserAccount.php?idfile=3&iduser=3&username=usernew&password=pwdnew&keysearch=keynew&typeAccount=3&link=www&opt=opt&delete=true
+http://localhost/dev_memory_php/memory/account/addUserAccount.php?idfile=3&iduser=3&username=usernew&password=pwdnew&keysearch=keynew&typeAccount=3&link=www&opt=opt&delete=true
+
+
+DA FARE
+http://localhost/memory/rest/discoveryInformation/addUserAccount
+username
+infoAccount
+ritorna true o false
+
+
+http://localhost/memory/rest/discoveryInformation/deleteUserAccount
+username
+idAccountDB
+ritorna true o false
+
+
+
+http://localhost/memory/rest/discoveryInformation/createUser
+tutti i parametri+ruolo
+
+http://localhost/memory/rest/discoveryInformation/deleteUser
+username
+password
+
+
+CRITTOGRAFARE TUTTO: da capire come fare
