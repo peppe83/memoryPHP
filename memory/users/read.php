@@ -11,7 +11,7 @@ include_once '../objects/users.php';
 $database = new Database();
 $db = $database->getConnection();
 
-// initialize object
+// initialize object 
 $users = new Users($db);
 
 // query products
