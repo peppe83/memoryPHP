@@ -58,7 +58,6 @@ $num = $stmt->rowCount();
 
 // 		array_push($products_arr["records"], $product_item);
 // 	}
-
 // 	echo json_encode($products_arr);
 // }
 if($num>0){
