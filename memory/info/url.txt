@@ -4,7 +4,7 @@ http://localhost/dev_memory_php/memory/users/loginUser.php?username=we&password=
 http://localhost:8787/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=3
 http://localhost:8787/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=4
 http://localhost/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=3
-http://localhost/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=4
+http://localhost/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=4 
 ################
 http://localhost:8787/dev_memory_php/memory/account/getUserAccount.php?username=4&usernameParent=3&keysearch=*&typeAccount=*
 http://localhost:8787/dev_memory_php/memory/account/getUserAccount.php?username=3&usernameParent=3&keysearch=*&typeAccount=*
