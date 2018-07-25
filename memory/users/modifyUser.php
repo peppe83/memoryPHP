@@ -7,7 +7,13 @@ header("Content-Type: application/json; charset=UTF-8");
 include_once '../config/database.php';
 include_once '../objects/users.php';
 
-$usernameAdmin =  $_GET['usernameAdmin'];
+$iduser =  $_GET['iduser'];
+$enabled =  $_GET['enabled'];
+$email =  $_GET['email'];
+$phone =  $_GET['phone'];
+$role =  $_GET['role'];
+
+//http://localhost/dev_memory_php/memory/users/modifyUser.php?iduser=1&enabled&email=mail&phone=ph&role=ROLE_USER
 
 // instantiate database and product object
 $database = new Database();
@@ -17,17 +23,27 @@ $db = $database->getConnection();
 $users = new Users($db);
 
 // query products
-$stmt = $users->readAll($usernameAdmin);
+$stmt = $users->getUserById($iduser);
+$num = $stmt->rowCount();
+if($num==0){
+    echo json_encode(
+        array("error" => "Utente da modificare non trovato. Riprovare")
+        );
+    return;
+}
+
+// query products
+$stmt = $users->modifyUser($iduser, $enabled, $email, $phone, $role);
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
 if($num>0){
-
-	// products array
-	$products_arr=array();
-	$products_arr["records"]=array();
-
-	// retrieve our table contents
+    echo json_encode(
+        array("insert" => "ok", "msg" => "Modifica avvenuta correttamente")
+        );
+	
+	
+	/*// retrieve our table contents
 	// fetch() is faster than fetchAll()
 	// http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -51,14 +67,14 @@ if($num>0){
 		);
 
 		array_push($products_arr["records"], $product_item);
-	}
+	}*/
 
-	echo json_encode($products_arr);
+	//echo json_encode($products_arr);
 }
 
 else{
 	echo json_encode(
-			array("message" => "Nessun utente trovato.")
+			array("message" => "Nessuna modifica effettuata.")
 			);
 }
 ?>

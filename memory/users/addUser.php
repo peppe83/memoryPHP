@@ -7,7 +7,16 @@ header("Content-Type: application/json; charset=UTF-8");
 include_once '../config/database.php';
 include_once '../objects/users.php';
 
-$usernameAdmin =  $_GET['usernameAdmin'];
+$username =  $_GET['username'];
+$password =  $_GET['password'];
+$name =  $_GET['name'];
+$surname =  $_GET['surname'];
+$email =  $_GET['email'];
+$phone =  $_GET['phone'];
+$description =  $_GET['description'];
+$role =  $_GET['role'];
+
+//http://localhost/dev_memory_php/memory/users/addUser.php?username=few&password=few&name=NAME&surname=sur&email=mail&phone=ph&description=des&role=ROLE_USER
 
 // instantiate database and product object
 $database = new Database();
@@ -17,17 +26,28 @@ $db = $database->getConnection();
 $users = new Users($db);
 
 // query products
-$stmt = $users->readAll($usernameAdmin);
+$stmt = $users->getUser($username);
+$num = $stmt->rowCount();
+if($num>0){
+    echo json_encode(
+        array("error" => "Username esistente. Riprovare")
+        );
+    return;
+}
+
+// query products
+$stmt = $users->buildUser($username, $password, $name, $surname, $email, $phone, $description, $role);
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
 if($num>0){
 
-	// products array
-	$products_arr=array();
-	$products_arr["records"]=array();
-
-	// retrieve our table contents
+    echo json_encode(
+        array("insert" => "ok", "msg" => "Inserimento avvenuto correttamente")
+        );
+	
+	
+	/*// retrieve our table contents
 	// fetch() is faster than fetchAll()
 	// http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -51,14 +71,14 @@ if($num>0){
 		);
 
 		array_push($products_arr["records"], $product_item);
-	}
+	}*/
 
-	echo json_encode($products_arr);
+	//echo json_encode($products_arr);
 }
 
 else{
 	echo json_encode(
-			array("message" => "Nessun utente trovato.")
+			array("message" => "Impossibile creare il nuov utente.")
 			);
 }
 ?>

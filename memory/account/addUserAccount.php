@@ -21,6 +21,13 @@ include_once '../objects/account.php';
 $database = new Database();
 $db = $database->getConnection();
 
+if($db==null){
+    echo json_encode(
+        array("error" => "Impossibile accedere al DB. Riprovare")
+        );
+    return;
+}
+
 // initialize object
 $account = new Account($db);
 

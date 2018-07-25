@@ -3,12 +3,8 @@ class Account{
  
     // database connection and table name
     private $conn;
-    private $table_name = "account";
+    private $table_name_account = "account";
     private $table_name_type_account = "type_account";
-    
-    private $table_name_users = "users";
-    private $table_name_roles = "roles";
-    private $table_name_users_roles = "users_roles";
  
     // object properties
     public $id_file;
@@ -46,8 +42,8 @@ class Account{
                             and 'ROLE_ADMIN' = ur.id_role and u.id_user='" . $usernameParentURL . "')";
         }
         
-        $query = "SELECT a.id_file, a.id_db, a.id_user, a.id_type, a.link, a.username, a.password, a.opt, a.keysearch, a.delete
-        from account a where a.id_user = '" . $usernameURL . "' " . $extraWhere;
+        $query = "SELECT a.id_file, a.id_db, a.id_user, a.id_type, a.link, a.username, a.password, a.opt, a.keysearch, a.del
+        from " . $this->table_name_account . " a where a.id_user = '" . $usernameURL . "' " . $extraWhere;          //a.del is false and
     
     	// prepare query statement
     	$stmt = $this->conn->prepare($query);
@@ -60,10 +56,22 @@ class Account{
     
     
     function addAccount($idFileURL, $idUserURL, $usernameURL, $passwordURL, $keysearchURL, $typeAccountURL, $linkURL, $optURL, $deleteURL){
-        $query = "INSERT INTO account (id_file, id_user, id_type, link, username, password, opt, keysearch, del)
+        $query = "INSERT INTO " . $this->table_name_account . " (id_file, id_user, id_type, link, username, password, opt, keysearch, del)
             VALUES (" . $idFileURL . ", " . $idUserURL . ", " . $typeAccountURL . ", '" . $linkURL . "', '" . $usernameURL . "',
                      '" . $passwordURL . "', '" . $optURL . "', '" . $keysearchURL . "', " . $deleteURL . ")";
         
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        
+        // execute query
+        $stmt->execute();
+        
+        return $stmt;
+    }
+    
+    function removeAccount($iddb){
+        $query = "UPDATE " . $this->table_name_account . " SET del = true WHERE id_db = " . $iddb;
+
         // prepare query statement
         $stmt = $this->conn->prepare($query);
         

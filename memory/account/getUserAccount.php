@@ -15,6 +15,12 @@ include_once '../objects/account.php';
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
+if($db==null){
+    echo json_encode(
+        array("error" => "Impossibile accedere al DB. Riprovare")
+        );
+    return;
+}
 
 // initialize object
 $account = new Account($db);
@@ -59,7 +65,7 @@ if($num>0){
 
 else{
 	echo json_encode(
-			array("message" => "No account found.")
+			array("message" => "Nessun account trovato")
 			);
 }
 ?>
