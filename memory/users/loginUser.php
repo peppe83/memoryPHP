@@ -13,12 +13,24 @@ include_once '../objects/users.php';
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
-
+if($db==null){
+    echo json_encode(
+        array("error" => "Impossibile accedere al DB. Riprovare")
+        );
+    return;
+}
 // initialize object
 $users = new Users($db);
 
 // query products
 $stmt = $users->loginUser($userURL, $passwordURL);
+if($stmt==null){
+    //     echo json_encode(
+    //         array("error" => "Impossibile interrogare il database. Riprovare")
+    //     );
+    return;
+}
+
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
@@ -45,9 +57,10 @@ if($num>0){
 				"surname" => $surname,
 				"email" => $email,
 				"phone" => $phone,
-				"enabled" => $enabled,
+		        "enabled" => (bool)$enabled,
 				"description" => html_entity_decode($description),
 				"date_creation" => $date_creation,
+		        "date_update" => $date_update,
 		        "role" => $role
 		);
 
@@ -59,7 +72,7 @@ if($num>0){
 
 else{
 	echo json_encode(
-			array("message" => "No users found.")
-			);
+	    array("message" => "Utente non trovato.")
+	);
 }
 ?>

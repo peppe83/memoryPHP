@@ -6,6 +6,12 @@ http://localhost:8787/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=4
 http://localhost/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=3
 http://localhost/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=4 
 ################
+http://localhost:8787/dev_memory_php/memory/users/addUser.php?username=few5&password=few&name=NAME&surname=sur&email=mail&phone=ph&description=des&role=ROLE_USER
+http://localhost/dev_memory_php/memory/users/addUser.php?username=few5&password=few&name=NAME&surname=sur&email=mail&phone=ph&description=des&role=ROLE_USER
+################
+http://localhost/dev_memory_php/memory/users/modifyUser.php?iduser=1&enabled&email=mail&phone=ph&role=ROLE_USER
+http://localhost/dev_memory_php/memory/users/modifyUser.php?iduser=13&enabled=true&email=mail&phone=ph&role=ROLE_USER1
+################
 http://localhost:8787/dev_memory_php/memory/account/getUserAccount.php?username=4&usernameParent=3&keysearch=*&typeAccount=*
 http://localhost:8787/dev_memory_php/memory/account/getUserAccount.php?username=3&usernameParent=3&keysearch=*&typeAccount=*
 http://localhost:8787/dev_memory_php/memory/account/getUserAccount.php?username=3&usernameParent=3&keysearch=key1&typeAccount=*
@@ -13,24 +19,16 @@ http://localhost/dev_memory_php/memory/account/getUserAccount.php?username=4&use
 http://localhost/dev_memory_php/memory/account/getUserAccount.php?username=3&usernameParent=3&keysearch=*&typeAccount=*
 http://localhost/dev_memory_php/memory/account/getUserAccount.php?username=3&usernameParent=3&keysearch=key1&typeAccount=*
 ################
-http://localhost:8787/dev_memory_php/memory/account/addUserAccount.php?idfile=3&iduser=3&username=usernew&password=pwdnew&keysearch=keynew&typeAccount=3&link=www&opt=opt&delete=true
-http://localhost/dev_memory_php/memory/account/addUserAccount.php?idfile=3&iduser=3&username=usernew&password=pwdnew&keysearch=keynew&typeAccount=3&link=www&opt=opt&delete=true
+http://localhost:8787/dev_memory_php/memory/account/addUserAccount.php?idfile=3&iduser=3&username=usernew&password=pwdnew&keysearch=keynew&typeAccount=3&link=www&opt=opt
+http://localhost/dev_memory_php/memory/account/addUserAccount.php?idfile=3&iduser=3&username=usernew&password=pwdnew&keysearch=keynew&typeAccount=3&link=www&opt=opt
 ################
 http://localhost:8787/dev_memory_php/memory/account/deleteUserAccount.php?iddb=5
 http://localhost/dev_memory_php/memory/account/deleteUserAccount.php?iddb=5
-################
-http://localhost:8787/dev_memory_php/memory/users/addUser.php?username=few5&password=few&name=NAME&surname=sur&email=mail&phone=ph&description=des&role=ROLE_USER
-http://localhost/dev_memory_php/memory/users/addUser.php?username=few5&password=few&name=NAME&surname=sur&email=mail&phone=ph&description=des&role=ROLE_USER
-################
-http://localhost/dev_memory_php/memory/users/modifyUser.php?iduser=1&enabled&email=mail&phone=ph&role=ROLE_USER
-http://localhost/dev_memory_php/memory/users/modifyUser.php?iduser=13&enabled=true&email=mail&phone=ph&role=ROLE_USER1
 
 
-DA FARE - continueare
-modifyUser di users.php non fa aggiornameto e gestire update del ruolo facendo update su tabella users_role
 
-inserimento utente: aggiungere anche il ruolo
-
-
+da fare:
+eliminazione utente e tutti i suoi account e role
+eliminare read.php
 
 CRITTOGRAFARE TUTTI I VALORI DI TUTTI I CAMPI, IN LETTURA E IN SCRITTURA

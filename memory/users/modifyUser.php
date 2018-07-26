@@ -18,63 +18,50 @@ $role =  $_GET['role'];
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
-
+if($db==null){
+    echo json_encode(
+        array("error" => "Impossibile accedere al DB. Riprovare")
+        );
+    return;
+}
 // initialize object
 $users = new Users($db);
-
-// query products
 $stmt = $users->getUserById($iduser);
+if($stmt==null){
+//     echo json_encode(
+//         array("error" => "Impossibile interrogare il database. Riprovare")
+//     );
+    return;
+}
+
 $num = $stmt->rowCount();
 if($num==0){
     echo json_encode(
         array("error" => "Utente da modificare non trovato. Riprovare")
-        );
+    );
     return;
 }
 
 // query products
-$stmt = $users->modifyUser($iduser, $enabled, $email, $phone, $role);
+$stmt = $users->modifyUser($iduser, $enabled, $email, $phone);
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
 if($num>0){
-    echo json_encode(
-        array("insert" => "ok", "msg" => "Modifica avvenuta correttamente")
+    $stmt = $users->modifyUserRole($iduser, $role);
+    $num = $stmt->rowCount();
+    if($num>0){
+        echo json_encode(
+            array("insert" => "ok", "msg" => "Modifica avvenuta correttamente")
         );
-	
-	
-	/*// retrieve our table contents
-	// fetch() is faster than fetchAll()
-	// http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
-	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-		// extract row
-		// this will make $row['name'] to
-		// just $name only
-		extract($row);
-
-		$product_item=array(
-				"id_user" => $id_user,
-				"username" => $username,
-				"password" => $password,
-				"name" => $name,
-				"surname" => $surname,
-				"email" => $email,
-				"phone" => $phone,
-				"enabled" => $enabled,
-				"description" => html_entity_decode($description),
-				"date_creation" => $date_creation,
-		        "role" => $role
-		);
-
-		array_push($products_arr["records"], $product_item);
-	}*/
-
-	//echo json_encode($products_arr);
-}
-
-else{
+    } else {
+        echo json_encode(
+            array("message" => "Nessuna modifica effettuata.")
+            );
+    }
+} else {
 	echo json_encode(
-			array("message" => "Nessuna modifica effettuata.")
-			);
+	   array("message" => "Nessuna modifica effettuata.")
+	);
 }
 ?>

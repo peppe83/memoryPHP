@@ -21,12 +21,24 @@ $role =  $_GET['role'];
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
-
+if($db==null){
+    echo json_encode(
+        array("error" => "Impossibile accedere al DB. Riprovare")
+        );
+    return;
+}
 // initialize object
 $users = new Users($db);
 
 // query products
 $stmt = $users->getUser($username);
+if($stmt==null){
+//     echo json_encode(
+//         array("error" => "Impossibile interrogare il database. Riprovare")
+//     );
+    return;
+}
+
 $num = $stmt->rowCount();
 if($num>0){
     echo json_encode(
@@ -36,49 +48,34 @@ if($num>0){
 }
 
 // query products
-$stmt = $users->buildUser($username, $password, $name, $surname, $email, $phone, $description, $role);
+$stmt = $users->addUser($username, $password, $name, $surname, $email, $phone, $description);
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
 if($num>0){
+    //inserisco il ruolo
+    $stmt = $users->getIdUserByUsername($username);
+    $num = $stmt->rowCount();
+    if($num>0){
+        $result = $stmt->fetch();
+        $id_user = $result[0];
+        $stmt = $users->addUserRole($id_user, $role);
+        $num = $stmt->rowCount();
+        if($num>0){
+            $stmt = $users->updateDateUpdate($id_user);
+            $num = $stmt->rowCount();
+            if($num>0){
+                echo json_encode(
+                    array("insert" => "ok", "msg" => "Inserimento avvenuto correttamente")
+                );
+                return;
+            }
+        }
+    }
+} 
 
-    echo json_encode(
-        array("insert" => "ok", "msg" => "Inserimento avvenuto correttamente")
-        );
-	
-	
-	/*// retrieve our table contents
-	// fetch() is faster than fetchAll()
-	// http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
-	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-		// extract row
-		// this will make $row['name'] to
-		// just $name only
-		extract($row);
+echo json_encode(
+    array("message" => "Impossibile creare il nuov utente.")
+);
 
-		$product_item=array(
-				"id_user" => $id_user,
-				"username" => $username,
-				"password" => $password,
-				"name" => $name,
-				"surname" => $surname,
-				"email" => $email,
-				"phone" => $phone,
-				"enabled" => $enabled,
-				"description" => html_entity_decode($description),
-				"date_creation" => $date_creation,
-		        "role" => $role
-		);
-
-		array_push($products_arr["records"], $product_item);
-	}*/
-
-	//echo json_encode($products_arr);
-}
-
-else{
-	echo json_encode(
-			array("message" => "Impossibile creare il nuov utente.")
-			);
-}
 ?>

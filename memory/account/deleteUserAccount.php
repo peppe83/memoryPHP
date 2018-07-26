@@ -12,7 +12,6 @@ include_once '../objects/account.php';
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
-
 if($db==null){
     echo json_encode(
         array("error" => "Impossibile accedere al DB. Riprovare")
@@ -25,15 +24,22 @@ $account = new Account($db);
 
 // query products
 $stmt = $account->removeAccount($iddb);
+if($stmt==null){
+    //     echo json_encode(
+    //         array("error" => "Impossibile interrogare il database. Riprovare")
+    //     );
+    return;
+}
+
 $num = $stmt->rowCount();
 
 if($num==1){
     echo json_encode(
-        array("delete" => "ok")
+        array("delete" => "Account eliminato correttamente")
         );
 } else {
 	echo json_encode(
-	   		array("message" => "Nessun account eliminato")
-		  	);
+	   array("message" => "Impossibile eliminare l'account.")
+	);
 }
 ?>

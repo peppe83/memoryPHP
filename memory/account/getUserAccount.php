@@ -27,6 +27,13 @@ $account = new Account($db);
 
 // query products
 $stmt = $account->readAll($usernameURL, $usernameParentURL, $keysearchURL, $typeAccountURL);
+if($stmt==null){
+    //     echo json_encode(
+    //         array("error" => "Impossibile interrogare il database. Riprovare")
+    //     );
+    return;
+}
+
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
@@ -65,7 +72,7 @@ if($num>0){
 
 else{
 	echo json_encode(
-			array("message" => "Nessun account trovato")
-			);
+		array("message" => "Nessun account trovato")
+	);
 }
 ?>

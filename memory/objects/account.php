@@ -5,6 +5,9 @@ class Account{
     private $conn;
     private $table_name_account = "account";
     private $table_name_type_account = "type_account";
+    private $table_name_users = "users";
+    //private $table_name_roles = "roles";
+    private $table_name_users_roles = "users_roles";
  
     // object properties
     public $id_file;
@@ -55,10 +58,10 @@ class Account{
     }
     
     
-    function addAccount($idFileURL, $idUserURL, $usernameURL, $passwordURL, $keysearchURL, $typeAccountURL, $linkURL, $optURL, $deleteURL){
-        $query = "INSERT INTO " . $this->table_name_account . " (id_file, id_user, id_type, link, username, password, opt, keysearch, del)
+    function addAccount($idFileURL, $idUserURL, $usernameURL, $passwordURL, $keysearchURL, $typeAccountURL, $linkURL, $optURL){
+        $query = "INSERT INTO " . $this->table_name_account . " (id_file, id_user, id_type, link, username, password, opt, keysearch)
             VALUES (" . $idFileURL . ", " . $idUserURL . ", " . $typeAccountURL . ", '" . $linkURL . "', '" . $usernameURL . "',
-                     '" . $passwordURL . "', '" . $optURL . "', '" . $keysearchURL . "', " . $deleteURL . ")";
+                     '" . $passwordURL . "', '" . $optURL . "', '" . $keysearchURL . "')";
         
         // prepare query statement
         $stmt = $this->conn->prepare($query);
