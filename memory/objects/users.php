@@ -26,19 +26,16 @@ class Users{
         $this->conn = $db;
     }
     
-    // getUser
-    function getUser($username){
+    // getIdUserByUsername
+    function getIdUserByUsername($username){
         if ($username==null || $username=="") {
             echo json_encode(
                 array("error" => "Utente non riconosciuto. Riprovare")
-            );
+                );
             return;
         }
+        $query = "SELECT u.id_user FROM " . $this->table_name_users . " u where u.username = '" . $username . "'";
         
-        $query = "SELECT u.id_user
-            FROM " . $this->table_name_users . " u
-            where u.username = '" . $username . "'";
-
         // prepare query statement
         $stmt = $this->conn->prepare($query);
         
@@ -108,19 +105,6 @@ class Users{
         return $stmt;
     }
     
-    // getIdUserByUsername
-    function getIdUserByUsername($username){
-    $query = "SELECT u.id_user FROM " . $this->table_name_users . " u where u.username = '" . $username . "'";
-    
-    // prepare query statement
-    $stmt = $this->conn->prepare($query);
-    
-    // execute query
-    $stmt->execute();
-    
-    return $stmt;
-    }
-    
     // addUser
     function addUser($username, $password, $name, $surname, $email, $phone, $description){    
         $query = "INSERT INTO " . $this->table_name_users . " (username, password, name, surname, email, phone, description, enabled)
@@ -132,7 +116,7 @@ class Users{
         // execute query
         $stmt->execute();
     
-    return $stmt;
+        return $stmt;
     }
     
     // addUserRole
@@ -239,4 +223,17 @@ class Users{
         
         return $stmt;
     }
+    
+    // deleteUser
+    function deleteUser($idUser){
+        $query = "DELETE u, ur FROM " . $this->table_name_users . " u,  " . $this->table_name_users_roles . " ur WHERE u.id_user = ur.id_user AND u.id_user = " . $idUser;        
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        
+        // execute query
+        $stmt->execute();
+        
+        return $stmt;
+    }
+    
 }

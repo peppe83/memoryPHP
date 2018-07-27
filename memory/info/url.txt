@@ -9,8 +9,11 @@ http://localhost/dev_memory_php/memory/users/getAllUser.php?usernameAdmin=4
 http://localhost:8787/dev_memory_php/memory/users/addUser.php?username=few5&password=few&name=NAME&surname=sur&email=mail&phone=ph&description=des&role=ROLE_USER
 http://localhost/dev_memory_php/memory/users/addUser.php?username=few5&password=few&name=NAME&surname=sur&email=mail&phone=ph&description=des&role=ROLE_USER
 ################
-http://localhost/dev_memory_php/memory/users/modifyUser.php?iduser=1&enabled&email=mail&phone=ph&role=ROLE_USER
+http://localhost:8787/dev_memory_php/memory/users/modifyUser.php?iduser=1&enabled&email=mail&phone=ph&role=ROLE_USER
 http://localhost/dev_memory_php/memory/users/modifyUser.php?iduser=13&enabled=true&email=mail&phone=ph&role=ROLE_USER1
+################
+http://localhost:8787/dev_memory_php/memory/users/deleteUser.php?iduser=25
+http://localhost/dev_memory_php/memory/users/deleteUser.php?iduser=25
 ################
 http://localhost:8787/dev_memory_php/memory/account/getUserAccount.php?username=4&usernameParent=3&keysearch=*&typeAccount=*
 http://localhost:8787/dev_memory_php/memory/account/getUserAccount.php?username=3&usernameParent=3&keysearch=*&typeAccount=*
@@ -24,11 +27,8 @@ http://localhost/dev_memory_php/memory/account/addUserAccount.php?idfile=3&iduse
 ################
 http://localhost:8787/dev_memory_php/memory/account/deleteUserAccount.php?iddb=5
 http://localhost/dev_memory_php/memory/account/deleteUserAccount.php?iddb=5
-
-
-
+################
+http://localhost:8787/dev_memory_php/memory/test/testCrypto.php
+http://localhost/dev_memory_php/memory/test/testCrypto.php
 da fare:
-eliminazione utente e tutti i suoi account e role
-eliminare read.php
-
 CRITTOGRAFARE TUTTI I VALORI DI TUTTI I CAMPI, IN LETTURA E IN SCRITTURA

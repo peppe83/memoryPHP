@@ -31,7 +31,7 @@ if($db==null){
 $users = new Users($db);
 
 // query products
-$stmt = $users->getUser($username);
+$stmt = $users->getIdUserByUsername($username);
 if($stmt==null){
 //     echo json_encode(
 //         array("error" => "Impossibile interrogare il database. Riprovare")
@@ -75,7 +75,7 @@ if($num>0){
 } 
 
 echo json_encode(
-    array("message" => "Impossibile creare il nuov utente.")
+    array("message" => "Impossibile creare il nuovo utente.")
 );
 
 ?>
